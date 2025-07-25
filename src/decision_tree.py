@@ -19,6 +19,7 @@ from sklearn.tree import DecisionTreeClassifier as DTC
 
 
 def decision_tree(df_arrests_train, df_arrests_test):
+
     features= ["num_fel_arrests_last_year", "current_charge_felony"]
 #Create a parameter grid called `param_grid_dt` containing three values for tree depth. (Note C has to be greater than zero) 
     param_grid_dt= {"max_depth": [3, 5, 10]}
@@ -42,6 +43,7 @@ def decision_tree(df_arrests_train, df_arrests_test):
 
 #Now predict for the test set. Name this column `pred_dt` 
     pred_dt= gs_cv_dt.predict_proba(df_arrests_test[features])[:, 1]
+
     df_arrests_test["pred_dt"]= pred_dt
 
 #save as .csv('s) in `data/` and read into PART 5 in main.py
@@ -49,4 +51,3 @@ def decision_tree(df_arrests_train, df_arrests_test):
     df_arrests_train.to_csv("data/df_arrests_train.csv", index=False)
 
     return df_arrests_test, df_arrests_train
-

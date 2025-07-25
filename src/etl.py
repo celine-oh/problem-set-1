@@ -15,3 +15,4 @@ def etl():
     pred_universe_raw.to_csv('data/pred_universe_raw.csv', index=False)
     arrest_events_raw.to_csv('data/arrest_events_raw.csv', index=False)
 # Save both data frames to `data/` -> 'pred_universe_raw.csv', 'arrest_events_raw.csv'
+

@@ -20,6 +20,7 @@ from sklearn.model_selection import StratifiedKFold as KFold_strat
 from sklearn.linear_model import LogisticRegression as lr
 
 def logistic_regression(df_arrests):
+
 #Use train_test_split to create two dataframes from `df_arrests`, the first is called `df_arrests_train` and the second is called `df_arrests_test`. Set test_size to 0.3, shuffle to be True. Stratify by the outcome  
     df_arrests_train, df_arrests_test = train_test_split(df_arrests, test_size=0.3, shuffle= True, stratify=df_arrests["y"])
 
@@ -51,12 +52,14 @@ def logistic_regression(df_arrests):
 
 #Now predict for the test set. Name this column `pred_lr`
     pred_lr= gs_cv.predict_proba(df_arrests_test[features])[:, 1]
+
     df_arrests_test["pred_lr"]= pred_lr
 
     df_arrests_test.to_csv("data/df_arrests_test.csv", index=False)
     df_arrests_train.to_csv("data/df_arrests_train.csv", index=False)
 
     return df_arrests_train, df_arrests_test
+
 # Your code here
 
 

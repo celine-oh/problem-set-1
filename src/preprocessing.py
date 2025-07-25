@@ -72,7 +72,7 @@ def preprocessing():
 #Return `df_arrests` for use in main.py for PART 3; if you can't figure this out, save as a .csv in `data/` and read into PART 3 in main.py
     df_arrests.drop(columns=["mark_future_felony", "mark_past_felony"], inplace=True)
     df_arrests.to_csv("data/df_arrests.csv", index=False)
-    
+
     return df_arrests
 
 
