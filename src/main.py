@@ -14,7 +14,7 @@ import calibration_plot
 def main():
 
     # PART 1: Instanciate etl, saving the two datasets in `./data/`
-
+    etl.run_etl()
     # PART 2: Call functions/instanciate objects from preprocessing
 
     # PART 3: Call functions/instanciate objects from logistic_regression

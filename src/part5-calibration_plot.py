@@ -16,6 +16,10 @@ Do both metrics agree that one model is more accurate than the other? Print this
 from sklearn.calibration import calibration_curve
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
+
+df_arrests_test= pd.read_csv("data/df_arrests_test.csv")
+
 
 # Calibration plot function 
 def calibration_plot(y_true, y_prob, n_bins=10):
@@ -34,7 +38,7 @@ def calibration_plot(y_true, y_prob, n_bins=10):
     bin_means, prob_true = calibration_curve(y_true, y_prob, n_bins=n_bins)
     
     #Create the Seaborn plot
-    sns.set(style="whitegrid")
+    sns.set_theme(style="whitegrid")
     plt.plot([0, 1], [0, 1], "k--")
     plt.plot(prob_true, bin_means, marker='o', label="Model")
     
