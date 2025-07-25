@@ -18,8 +18,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-df_arrests_test= pd.read_csv("data/df_arrests_test.csv")
-
 
 # Calibration plot function 
 def calibration_plot(y_true, y_prob, n_bins=10):
@@ -47,3 +45,5 @@ def calibration_plot(y_true, y_prob, n_bins=10):
     plt.title("Calibration Plot")
     plt.legend(loc="best")
     plt.show()
+
+
