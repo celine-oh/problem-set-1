@@ -17,35 +17,36 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.model_selection import StratifiedKFold as KFold_strat
 from sklearn.tree import DecisionTreeClassifier as DTC
 
-df_arrests_train= pd.read_csv("data/df_arrests_train.csv")
-df_arrests_test=pd.read_csv("data/df_arrests_test.csv")
+def decision_tree():
+    df_arrests_train= pd.read_csv("data/df_arrests_train.csv")
+    df_arrests_test=pd.read_csv("data/df_arrests_test.csv")
 
-features= ["num_fel_arrests_last_year", "current_charge_felony"]
+    features= ["num_fel_arrests_last_year", "current_charge_felony"]
 #Create a parameter grid called `param_grid_dt` containing three values for tree depth. (Note C has to be greater than zero) 
-param_grid_dt= {"max_depth": [3, 5, 10]}
+    param_grid_dt= {"max_depth": [3, 5, 10]}
 
 #Initialize the Decision Tree model. Assign this to a variable called `dt_model`. 
-dt_model= DTC()
-gs_cv_dt=GridSearchCV(estimator= dt_model, param_grid=param_grid_dt, cv=5)
+    dt_model= DTC()
+    gs_cv_dt=GridSearchCV(estimator= dt_model, param_grid=param_grid_dt, cv=5)
 
 #Run the model 
-gs_cv_dt.fit(df_arrests_train[features], df_arrests_train["y"])
+    gs_cv_dt.fit(df_arrests_train[features], df_arrests_train["y"])
 
 #What was the optimal value for max_depth?  Did it have the most or least regularization? Or in the middle? 
-optimal_max_depth= gs_cv_dt.best_params_["max_depth"]
-print(f"The optimal value for max depth was: {optimal_max_depth}")
-if optimal_max_depth == min(param_grid_dt["max_depth"]):
-    print("This had the most regularization.")
-elif optimal_max_depth == max(param_grid_dt["max_depth"]):
-    print("This had the least regularization.")
-else:
-    print("This was in the middle for regularization.")
+    optimal_max_depth= gs_cv_dt.best_params_["max_depth"]
+    print(f"The optimal value for max depth was: {optimal_max_depth}")
+    if optimal_max_depth == min(param_grid_dt["max_depth"]):
+        print("This had the most regularization.")
+    elif optimal_max_depth == max(param_grid_dt["max_depth"]):
+        print("This had the least regularization.")
+    else:
+        print("This was in the middle for regularization.")
 
 #Now predict for the test set. Name this column `pred_dt` 
-pred_dt= gs_cv_dt.predict(df_arrests_test[features])
-df_arrests_test["pred_dt"]= pred_dt
+    pred_dt= gs_cv_dt.predict(df_arrests_test[features])
+    df_arrests_test["pred_dt"]= pred_dt
 
 #save as .csv('s) in `data/` and read into PART 5 in main.py
-df_arrests_test.to_csv("data/df_arrests_test.csv", index=False)
-df_arrests_train.to_csv("data/df_arrests_train.csv", index=False)
+    df_arrests_test.to_csv("data/df_arrests_test.csv", index=False)
+    df_arrests_train.to_csv("data/df_arrests_train.csv", index=False)
 
